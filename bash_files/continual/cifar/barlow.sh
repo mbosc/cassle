@@ -28,9 +28,9 @@ python3 main_continual.py \
     --name barlow-cifar100 \
     --project ever-learn \
     --entity unitn-mhug \
-    --wandb \
     --save_checkpoint \
     --method barlow_twins \
     --proj_hidden_dim 2048 \
     --output_dim 2048 \
-    --scale_loss 0.1
+    --scale_loss 0.1 \
+    --disable_knn_eval

@@ -4,7 +4,7 @@ from cassle.distillers.decorrelative import decorrelative_distill_wrapper
 from cassle.distillers.knowledge import knowledge_distill_wrapper
 from cassle.distillers.predictive import predictive_distill_wrapper
 from cassle.distillers.predictive_mse import predictive_mse_distill_wrapper
-
+from cassle.distillers.replay import replay_wrapper
 
 __all__ = [
     "base_distill_wrapper",
@@ -13,6 +13,7 @@ __all__ = [
     "nearest_neighbor_distill_wrapper",
     "predictive_distill_wrapper",
     "predictive_mse_distill_wrapper",
+    "replay_wrapper",
 ]
 
 DISTILLERS = {
@@ -22,4 +23,5 @@ DISTILLERS = {
     "knowledge": knowledge_distill_wrapper,
     "predictive": predictive_distill_wrapper,
     "predictive_mse": predictive_mse_distill_wrapper,
+    "replay": replay_wrapper,
 }

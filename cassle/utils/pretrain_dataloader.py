@@ -25,7 +25,7 @@ def split_dataset(
         lengths = [len(dataset) // num_tasks] * num_tasks
         lengths[0] += len(dataset) - sum(lengths)
         task_dataset = torch.utils.data.random_split(
-            dataset, lengths, generator=torch.Generator().manual_seed(42)
+            dataset, lengths# generator=torch.Generator().manual_seed(42)
         )[task_idx]
     elif split_strategy == "domain":
         assert tasks is None

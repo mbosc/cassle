@@ -38,7 +38,7 @@ from cassle.utils.pretrain_dataloader import (
 
 
 def main():
-    seed_everything(5)
+    # seed_everything(5) # seed my ***
 
     args = parse_args_pretrain()
 
@@ -52,7 +52,9 @@ def main():
     tasks = None
     if args.split_strategy == "class":
         assert args.num_classes % args.num_tasks == 0
-        tasks = torch.randperm(args.num_classes).chunk(args.num_tasks)
+        # tasks = torch.randperm(args.num_classes).chunk(args.num_tasks)
+        # fixed order
+        tasks = torch.arange(args.num_classes).chunk(args.num_tasks)
 
     # pretrain and online eval dataloaders
     if not args.dali:
@@ -153,12 +155,18 @@ def main():
     if args.distiller:
         MethodClass = DISTILLERS[args.distiller](MethodClass)
 
+    args.buffer_dataset = train_dataset
     model = MethodClass(**args.__dict__, tasks=tasks if args.split_strategy == "class" else None)
+    del args.buffer_dataset
 
     # only one resume mode can be true
     assert [args.resume_from_checkpoint, args.pretrained_model].count(True) <= 1
 
+    old_buffer = None
     if args.resume_from_checkpoint:
+        if args.distiller == 'replay':
+            state_dict = torch.load(args.resume_from_checkpoint, map_location="cpu")["state_dict"]
+            old_buffer = (state_dict['buffer_seen'], state_dict['buffer'])
         pass  # handled by the trainer
     elif args.pretrained_model:
         print(f"Loading previous task checkpoint {args.pretrained_model}...")
@@ -212,6 +220,9 @@ def main():
         terminate_on_nan=True,
     )
 
+    if old_buffer is not None:
+        model.buffer_seen += old_buffer[0]
+        model.buffer += old_buffer[1]
     model.current_task_idx = args.task_idx
 
     if args.dali:

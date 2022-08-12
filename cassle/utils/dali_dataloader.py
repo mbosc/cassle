@@ -189,8 +189,8 @@ class NormalPipeline(Pipeline):
             seed (int): seed for random number generation. Defaults to 12.
         """
 
-        seed += device_id
-        super().__init__(batch_size, num_threads, device_id, seed)
+        # seed += device_id
+        super().__init__(batch_size, num_threads, device_id)#, seed)
 
         self.device = device
         self.validation = validation
@@ -546,9 +546,9 @@ class PretrainPipeline(Pipeline):
                 so just use when needed. Defaults to False.
         """
 
-        seed += device_id
+        # seed += device_id
         super().__init__(
-            batch_size=batch_size, num_threads=num_threads, device_id=device_id, seed=seed,
+            batch_size=batch_size, num_threads=num_threads, device_id=device_id#, seed=seed,
         )
 
         self.device = device
@@ -601,7 +601,7 @@ class PretrainPipeline(Pipeline):
             lengths[0] += len(data) - sum(lengths)
             data = list(
                 torch.utils.data.random_split(
-                    data, lengths, generator=torch.Generator().manual_seed(42)
+                    data, lengths#, generator=torch.Generator().manual_seed(42)
                 )[task_idx]
             )
         elif split_strategy == "domain":
@@ -726,9 +726,9 @@ class MulticropPretrainPipeline(Pipeline):
                 so just use when needed. Defaults to False.
         """
 
-        seed += device_id
+        # seed += device_id
         super().__init__(
-            batch_size=batch_size, num_threads=num_threads, device_id=device_id, seed=seed,
+            batch_size=batch_size, num_threads=num_threads, device_id=device_id#, seed=seed,
         )
 
         self.device = device

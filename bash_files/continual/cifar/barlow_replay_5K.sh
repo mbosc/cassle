@@ -25,7 +25,7 @@ python3 main_continual.py \
     --hue 0.1 \
     --gaussian_prob 0.0 0.0 \
     --solarization_prob 0.0 0.2 \
-    --name barlow-cifar100-decorrelative \
+    --name replay-cifar100-5k \
     --project ever-learn \
     --entity unitn-mhug \
     --save_checkpoint \
@@ -34,4 +34,4 @@ python3 main_continual.py \
     --output_dim 2048 \
     --scale_loss 0.1 \
     --disable_knn_eval \
-    --distiller decorrelative 
+    --distiller replay 

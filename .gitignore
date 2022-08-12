@@ -1,6 +1,9 @@
 # checkpoint
 last_checkpoint.txt
-
+.caches/
+experiments/
+.vscode/
+data/
 # tensorboard dir
 runs/
 

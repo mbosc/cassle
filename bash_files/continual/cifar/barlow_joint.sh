@@ -4,7 +4,7 @@ python3 main_continual.py \
     --data_dir $DATA_DIR \
     --split_strategy class \
     --max_epochs 500 \
-    --num_tasks 5 \
+    --num_tasks 1 \
     --task_idx 0 \
     --gpus 0 \
     --num_workers 4 \
@@ -25,7 +25,7 @@ python3 main_continual.py \
     --hue 0.1 \
     --gaussian_prob 0.0 0.0 \
     --solarization_prob 0.0 0.2 \
-    --name barlow-cifar100-decorrelative \
+    --name barlow-cifar100 \
     --project ever-learn \
     --entity unitn-mhug \
     --save_checkpoint \
@@ -33,5 +33,4 @@ python3 main_continual.py \
     --proj_hidden_dim 2048 \
     --output_dim 2048 \
     --scale_loss 0.1 \
-    --disable_knn_eval \
-    --distiller decorrelative 
+    --disable_knn_eval

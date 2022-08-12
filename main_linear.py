@@ -23,7 +23,7 @@ from cassle.utils.checkpointer import Checkpointer
 
 
 def main():
-    seed_everything(5)
+    # seed_everything(5) # seed my ***
 
     args = parse_args_linear()
 
